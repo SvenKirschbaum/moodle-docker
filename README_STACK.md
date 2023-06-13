@@ -2,7 +2,7 @@
 
 - Docker is instelled and working
 - Unix based System for the automatic plugin install script
-- Moodle Source code and this repository have been cloned to the local machine
+- Moodle Source code (Branch MOODLE_402_STABLE) and this repository have been cloned to the local machine
 
 ## Quick start
 
