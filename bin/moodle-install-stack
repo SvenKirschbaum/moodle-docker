@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+if [ ! -d "$MOODLE_DOCKER_WWWROOT" ];
+then
+    echo 'Error: $MOODLE_DOCKER_WWWROOT is not set or not an existing directory'
+    exit 1
+fi
+
+git clone https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate.git $MOODLE_DOCKER_WWWROOT/question/behaviour/dfexplicitvaildate;
+git clone https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate.git $MOODLE_DOCKER_WWWROOT/question/behaviour/dfcbmexplicitvaildate;
+git clone https://github.com/maths/moodle-qbehaviour_adaptivemultipart.git $MOODLE_DOCKER_WWWROOT/question/behaviour/adaptivemultipart;
+
+
+git clone https://github.com/maths/moodle-qtype_stack.git $MOODLE_DOCKER_WWWROOT/question/type/stack;
