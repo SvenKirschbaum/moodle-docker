@@ -1,8 +1,10 @@
+The content of this repository has been adapted to provide a easily deployable development and testing environment for STACK. 
+
 ## Prerequisites
 
-- Docker is instelled and working
-- Unix based System for the automatic plugin install script
-- Moodle Source code (Branch MOODLE_402_STABLE) and this repository have been cloned to the local machine
+- Unix based System
+- Docker is installed and working
+- Moodle Source code (Branch MOODLE_402_STABLE, master is currently broken),  and this repository have been cloned to the local machine
 
 ## Quick start
 
@@ -22,9 +24,9 @@ bin/moodle-install-stack
 bin/moodle-docker-compose up -d
 ```
 
-You can then access the Moodle-Installer via http://localhost:8000/. Please follow the instructions on screen. 
+You can then access the Moodle-Installer via http://localhost:8000/. Please follow the instructions on screen to complete the installation. 
 
-After the installation process is completed, go to Site Administration -> Plugins -> Stack, and configure the following settings:
+After the installation process is completed, run the `bin/moodle-update-stack-settings` to update the STACK configuration (psqlm mysql and mariadb only). Alternatively, you can go to Site Administration -> Plugins -> Stack, and configure the following settings:
 
 - Platform type: Server
 - Maxima version: 5.44.0
