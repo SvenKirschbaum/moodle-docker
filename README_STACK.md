@@ -26,6 +26,6 @@ You can then access the Moodle-Installer via http://localhost:8000/. Please foll
 
 After the installation process is completed, go to Site Administration -> Plugins -> Stack, and configure the following settings:
 
-Platform type: Server
-Maxima version: 5.44.0
-URL of the Maxima Pool: http://maxima:8080/maxima
+- Platform type: Server
+- Maxima version: 5.44.0
+- URL of the Maxima Pool: http://maxima:8080/maxima

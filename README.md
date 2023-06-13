@@ -3,6 +3,9 @@
 
 This repository contains Docker configuration aimed at Moodle developers and testers to easily deploy a testing environment for Moodle.
 
+## STACK Adaption
+Please look at the following file for informations regarding the STACK adaptions in this repo: [README_STACK.md](README_STACK.md)
+
 ## Features:
 * All supported database servers (PostgreSQL, MySQL, Micosoft SQL Server, Oracle XE)
 * Behat/Selenium configuration for Firefox and Chrome
