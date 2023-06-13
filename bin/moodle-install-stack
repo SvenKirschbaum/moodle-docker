@@ -7,9 +7,22 @@ then
     exit 1
 fi
 
-git clone https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate.git $MOODLE_DOCKER_WWWROOT/question/behaviour/dfexplicitvaildate;
-git clone https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate.git $MOODLE_DOCKER_WWWROOT/question/behaviour/dfcbmexplicitvaildate;
-git clone https://github.com/maths/moodle-qbehaviour_adaptivemultipart.git $MOODLE_DOCKER_WWWROOT/question/behaviour/adaptivemultipart;
+if [ ! -d "$MOODLE_DOCKER_WWWROOT/question/behaviour/dfexplicitvaildate" ]
+then
+  git clone https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate.git $MOODLE_DOCKER_WWWROOT/question/behaviour/dfexplicitvaildate;
+fi
 
+if [ ! -d "$MOODLE_DOCKER_WWWROOT/question/behaviour/dfcbmexplicitvaildate" ]
+then
+  git clone https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate.git $MOODLE_DOCKER_WWWROOT/question/behaviour/dfcbmexplicitvaildate;
+fi
 
-git clone https://github.com/maths/moodle-qtype_stack.git $MOODLE_DOCKER_WWWROOT/question/type/stack;
+if [ ! -d "$MOODLE_DOCKER_WWWROOT/question/behaviour/adaptivemultipart" ]
+then
+  git clone https://github.com/maths/moodle-qbehaviour_adaptivemultipart.git $MOODLE_DOCKER_WWWROOT/question/behaviour/adaptivemultipart;
+fi
+
+if [ ! -d "$MOODLE_DOCKER_WWWROOT/question/type/stack" ]
+then
+  git clone https://github.com/maths/moodle-qtype_stack.git $MOODLE_DOCKER_WWWROOT/question/type/stack;
+fi

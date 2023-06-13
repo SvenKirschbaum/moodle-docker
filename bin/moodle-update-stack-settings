@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+
+# First find out if this was called from symlink,
+# then find the real path of parent directory.
+# This is needed because macOS does not have GNU realpath.
+thisfile=$( readlink "${BASH_SOURCE[0]}" ) || thisfile="${BASH_SOURCE[0]}"
+basedir="$( cd "$( dirname "$thisfile" )/../" && pwd -P )"
+assetdir="${basedir}/assets"
+
+if [ -z "$MOODLE_DOCKER_DB" ];
+then
+    echo 'Error: $MOODLE_DOCKER_DB is not set'
+    exit 1
+fi
+
+echo "Updating settings...";
+
+# Stack Database configuration
+if [ $MOODLE_DOCKER_DB = "mariadb" ] || [ $MOODLE_DOCKER_DB = "mysql" ]
+then
+  cat $assetdir/database/stack-settings.sql | $basedir/bin/moodle-docker-compose exec -T db mysql -u moodle -p"m@0dl3ing" moodle;
+fi
+if [ $MOODLE_DOCKER_DB = "pgsql" ]
+then
+  cat $assetdir/database/stack-settings.sql | PGPASSWORD="m@0dl3ing" $basedir/bin/moodle-docker-compose exec -T db psql --username moodle moodle;
+fi
+
+
+echo "Clearing cache...";
+$basedir/bin/moodle-docker-compose exec -T webserver php admin/cli/purge_caches.php
