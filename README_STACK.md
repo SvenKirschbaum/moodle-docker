@@ -1,32 +1,41 @@
-The content of this repository has been adapted to provide a easily deployable development and testing environment for STACK. 
+The content of this repository has been adapted to provide an easily deployable development and testing environment for STACK. 
 
 ## Prerequisites
 
 - Unix based System
 - Docker is installed and working
-- Moodle Source code (Branch MOODLE_402_STABLE, master is currently broken),  and this repository have been cloned to the local machine
+- Moodle Source code and this repository have been cloned to the local machine
 
 ## Quick start
 
 ```bash
 # Set up path to Moodle code
 export MOODLE_DOCKER_WWWROOT=/path/to/moodle/code
-# Choose a db server (Currently supported: pgsql, mariadb, mysql, mssql, oracle)
+# Choose a db server (Currently supported: pgsql, mariadb and mysql, mssql and oracle will reuqire manual intervention)
 export MOODLE_DOCKER_DB=pgsql
 
 # Ensure customized config.php for the Docker containers is in place
 cp config.docker-template.php $MOODLE_DOCKER_WWWROOT/config.php
 
-# Install Stack and Plugins
-bin/moodle-install-stack
+# Install the Stack Plugin and its dependencies into your moodle code 
+bin/moodle-install-stack-plugin
+
+# Wait for DB to come up
+bin/moodle-docker-wait-for-db
 
 # Start up containers
 bin/moodle-docker-compose up -d
+
+# Automatically install the Database and configure STACK
+bin/moodle-install-database
 ```
 
-You can then access the Moodle-Installer via http://localhost:8000/. Please follow the instructions on screen to complete the installation. 
+You can then access Moodle via http://localhost:8000/.
+The automatically created account has the username *admin* and the password *admin*.
 
-After the installation process is completed, run the `bin/moodle-update-stack-settings` to update the STACK configuration (psqlm mysql and mariadb only). Alternatively, you can go to Site Administration -> Plugins -> Stack, and configure the following settings:
+### Advanced
+
+If you are using mssql or oracledb, please configure the following settings manually under Site Administration -> Plugins -> STACK:
 
 - Platform type: Server
 - Maxima version: 5.44.0
