@@ -31,7 +31,6 @@ else
 fi
 dockercompose="${dockercompose} -f ${basedir}/base.yml"
 dockercompose="${dockercompose} -f ${basedir}/service.mail.yml"
-dockercompose="${dockercompose} -f ${basedir}/maxima.yml"
 
 # PHP Version.
 export MOODLE_DOCKER_PHP_VERSION=${MOODLE_DOCKER_PHP_VERSION:-8.0}

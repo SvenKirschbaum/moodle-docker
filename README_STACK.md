@@ -26,17 +26,14 @@ bin/moodle-docker-wait-for-db
 # Start up containers
 bin/moodle-docker-compose up -d
 
-# Automatically install the Database and configure STACK
+# Automatically install moodle
 bin/moodle-install-database
 ```
 
 You can then access Moodle via http://localhost:8000/.
 The automatically created account has the username *admin* and the password *admin*.
 
-### Advanced
+To start using STACK, please open its configuration page (Site Administration -> Plugins -> STACK) and configure the following settings:
 
-If you are using mssql or oracledb, please configure the following settings manually under Site Administration -> Plugins -> STACK:
-
-- Platform type: Server
-- Maxima version: 5.44.0
-- URL of the Maxima Pool: http://maxima:8080/maxima
+- Platform: Linux
+- Maxima Version: default

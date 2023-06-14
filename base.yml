@@ -1,9 +1,13 @@
 version: "2"
 services:
   webserver:
-    image: "moodlehq/moodle-php-apache:${MOODLE_DOCKER_PHP_VERSION}"
+    build:
+      context: ./local-maxima
+      args:
+        MOODLE_DOCKER_PHP_VERSION: "${MOODLE_DOCKER_PHP_VERSION}"
     depends_on:
       - db
+    privileged: true
     volumes:
       - "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
       - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/apache2_faildumps.conf"

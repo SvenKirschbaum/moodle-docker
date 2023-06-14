@@ -23,27 +23,3 @@ then
   echo "Installing Database...";
   $basedir/bin/moodle-docker-compose exec webserver php admin/cli/install_database.php --agree-license --fullname="Docker moodle" --shortname="docker_moodle" --summary="Docker moodle site" --adminpass="admin" --adminemail="admin@example.com"
 fi
-
-settingsUpdated=false
-# Stack Database configuration
-if [ $MOODLE_DOCKER_DB = "mariadb" ] || [ $MOODLE_DOCKER_DB = "mysql" ]
-then
-  echo "Updating settings (mariadb/mysql) ...";
-  settingsUpdated=true
-  cat $assetdir/database/stack-settings.mariadb.sql | $basedir/bin/moodle-docker-compose exec -T db mysql -u moodle -p"m@0dl3ing" moodle;
-fi
-if [ $MOODLE_DOCKER_DB = "pgsql" ]
-then
-  echo "Updating settings (pgsql) ...";
-  settingsUpdated=true
-  cat $assetdir/database/stack-settings.psql.sql | $basedir/bin/moodle-docker-compose exec -e PGPASSWORD="m@0dl3ing" -T db psql --username moodle moodle;
-fi
-
-if [ ! $settingsUpdated ]
-then
-  echo "Updating the STACK settings automatically is not possible due to your choosen database system. Please consult documentation to perform this step manually";
-fi
-
-
-echo "Clearing cache...";
-$basedir/bin/moodle-docker-compose exec -T webserver php admin/cli/purge_caches.php
